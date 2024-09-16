@@ -90,6 +90,18 @@ public class ContactBook {
         return result;
     }
 
+    public boolean checkRepeatedNumbers(){
+        for (int i = 0 ; i<counter; i++){
+            int number = contacts[i].getPhone();
+            for (int j = 0; j<counter; j++){
+             if(contacts[j].getPhone() == number && i!=j){
+                return true;
+             }
+            }
+        }
+        return false;
+    }
+
     private void resize() {
         Contact tmp[] = new Contact[2*contacts.length];
         for (int i=0;i<counter; i++)

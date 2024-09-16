@@ -14,11 +14,14 @@ public class Main {
     public static final String SET_EMAIL      = "SE";
     public static final String LIST_CONTACTS  = "LC";
     public static final String GET_NAME       = "GN";
+    public static final String EQUAL_PHONE    = "EP";
     public static final String QUIT           = "Q";
 
     //Constantes que definem as mensagens para o utilizador
     public static final String CONTACT_EXISTS = "contactBook.Contact already exists.";
     public static final String CONTACT_N_EXISTS = "Phone number does not exist.";
+    public static final String PHONE_NUMBER_REPEATED = "There are contacts that share phone numbers.";
+    public static final String PHONE_NUMBER_NOT_REPEATED = "All contacts have different phone numbers.";
     public static final String NAME_NOT_EXIST = "contactBook.Contact does not exist.";
     public static final String CONTACT_ADDED = "contactBook.Contact added.";
     public static final String CONTACT_REMOVED = "contactBook.Contact removed.";
@@ -57,6 +60,9 @@ public class Main {
                     break;
                 case GET_NAME:
                     getContactName(in, cBook);
+                    break;
+                case EQUAL_PHONE:
+                    checkEqualPhones(cBook);
                     break;
                 default:
                     System.out.println(COMMAND_ERROR);
@@ -159,5 +165,12 @@ public class Main {
             System.out.println(cBook.getName(phoneNumber));
         }
         else { System.out.println(CONTACT_N_EXISTS); }
+    }
+
+    private static void checkEqualPhones(ContactBook cBook) {
+        if(cBook.checkRepeatedNumbers()) {
+            System.out.println(PHONE_NUMBER_REPEATED);
+        }
+        else { System.out.println(PHONE_NUMBER_NOT_REPEATED); }
     }
 }
